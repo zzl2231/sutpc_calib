@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>地图标定</title>
+  <link rel="stylesheet" href="/static/app.css">
+  <link rel="stylesheet" href="/static/map_calib.css">
+</head>
+<body>
+  <header>
+    <div>
+      <h1>带 RTK 的地图标定</h1>
+      <p id="summary">正在读取地图和 RTK。</p>
+    </div>
+    <div class="controls">
+      <button id="change-data" type="button">更换数据</button>
+      <button id="align" type="button">配准起点</button>
+      <button id="optimize" type="button">开始逐帧优化</button>
+      <button id="reset" type="button">返回选择</button>
+    </div>
+  </header>
+  <p id="notice"></p>
+  <div id="workspace">
+    <aside id="side">
+      <div id="side-scroll">
+      <section id="sources">
+        <h2>选择数据</h2>
+        <p class="hint">地图是 pcd 文件，或含 pointcloud_map.pcd 的目录。标定数据是 mcap。初始外参可选，格式同 sensors_calibration.yaml。</p>
+        <label>地图
+          <input id="map-path" type="text" spellcheck="false" placeholder="选择地图">
+        </label>
+        <label>标定数据
+          <input id="mcap-path" type="text" spellcheck="false" placeholder="选择 mcap">
+        </label>
+        <label>初始外参
+          <input id="yaml-path" type="text" spellcheck="false" placeholder="可不填">
+        </label>
+        <div class="source-actions">
+          <button id="browse-map" type="button">浏览地图</button>
+          <button id="browse-mcap" type="button">浏览数据包</button>
+          <button id="browse-yaml" type="button">浏览外参</button>
+          <button id="load-data" type="button">读取</button>
+        </div>
+        <div id="browser" hidden></div>
+      </section>
+      <section id="picker">
+        <h2>选择雷达</h2>
+        <p class="hint">初始外参按话题和文件里的雷达名预选，可以改。留空则这颗雷达仍用 RTK 搜索航向。</p>
+        <label>初始外参
+          <input id="yaml-review" type="text" spellcheck="false" placeholder="可不填">
+        </label>
+        <div class="source-actions">
+          <button id="match-extrinsic" type="button">匹配外参</button>
+        </div>
+        <div id="topics"></div>
+      </section>
+      <section id="starts" hidden>
+        <h2>临时起点</h2>
+        <p id="starts-note" class="hint"></p>
+        <div class="source-actions">
+          <button id="save-starts" type="button">保存起点</button>
+          <button id="restore-starts" type="button">恢复起点</button>
+        </div>
+      </section>
+      <section id="cards"></section>
+      </div>
+      <section id="output">
+        <div class="panel-head">
+          <h2>输出</h2>
+          <button id="show-result" type="button" hidden>标定结果</button>
+        </div>
+        <pre id="log"></pre>
+        <div class="resize-y" data-resize="output" title="拖动调整输出高度"></div>
+      </section>
+    </aside>
+    <div id="side-resizer" data-resize="side" title="拖动调整左栏宽度"></div>
+    <section id="view-wrap">
+      <canvas id="view"></canvas>
+      <p id="view-hint">白点是下采样地图，橙线是 RTK。红轴 X、绿轴 Y、蓝轴 Z。拖动旋转，滚轮缩放，Shift 或右键平移。数值上滚轮可微调，角度单位是度。</p>
+    </section>
+  </div>
+  <div id="result-dialog" hidden>
+    <div id="result-window">
+      <div class="panel-head">
+        <h2>标定结果</h2>
+        <button id="copy-result" type="button">复制标定文件</button>
+        <button id="close-result" type="button">关闭</button>
+      </div>
+      <div id="result-body"></div>
+      <div class="resize-corner" data-resize="result" title="拖动调整结果窗口"></div>
+    </div>
+  </div>
+  <script src="/static/view.js?v=15"></script>
+  <script src="/static/map_calib.js?v=16"></script>
+</body>
+</html>

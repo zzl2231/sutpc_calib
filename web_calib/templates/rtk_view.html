@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>RTK 点云播放</title>
+  <link rel="stylesheet" href="/static/app.css">
+  <link rel="stylesheet" href="/static/map_calib.css">
+  <link rel="stylesheet" href="/static/rtk_view.css">
+</head>
+<body>
+  <header>
+    <div>
+      <h1>RTK 点云播放</h1>
+      <p id="summary">先读取话题和外参，再播放。</p>
+    </div>
+    <div class="controls">
+      <button id="play-toggle" type="button" disabled>播放</button>
+    </div>
+  </header>
+  <p id="notice"></p>
+  <div id="workspace">
+    <aside id="side">
+      <div id="side-scroll">
+        <section id="sources">
+          <h2>数据</h2>
+          <p class="hint">外参相对 RTK 后轴中心。地图可选：带经纬度的地图目录，或已经转到投影坐标的 pcd。路径不在当前挂载里时，按当前输入重新挂载。</p>
+          <label>数据包
+            <input id="mcap-path" type="text" spellcheck="false">
+          </label>
+          <label>外参
+            <input id="yaml-path" type="text" spellcheck="false">
+          </label>
+          <label>地图
+            <input id="map-path" type="text" spellcheck="false" placeholder="可不填">
+          </label>
+          <div class="source-actions">
+            <button id="browse-mcap" type="button">浏览数据包</button>
+            <button id="browse-yaml" type="button">浏览外参</button>
+            <button id="browse-map" type="button">浏览地图</button>
+            <button id="clear-map" type="button">不用地图</button>
+            <button id="remount" type="button">按当前路径挂载</button>
+            <button id="inspect" type="button">读取话题</button>
+          </div>
+          <div id="browser" hidden></div>
+        </section>
+        <section id="assign" hidden>
+          <h2>话题对应外参</h2>
+          <p class="hint">按点云 frame_id 预选。不需要的话题留空。</p>
+          <div id="topics"></div>
+          <div class="source-actions">
+            <button id="start" type="button">坐标变换并播放</button>
+          </div>
+        </section>
+      </div>
+      <section id="output">
+        <div class="panel-head"><h2>播放</h2></div>
+        <div id="transport">
+          <input id="scrub" type="range" min="0" max="0" value="0" disabled>
+          <div class="transport-row">
+            <span id="clock">0.0 / 0.0 s</span>
+            <label class="step">速度
+              <select id="rate">
+                <option value="0.5">0.5</option>
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="4">4</option>
+              </select>
+            </label>
+          </div>
+        </div>
+        <pre id="log"></pre>
+      </section>
+    </aside>
+    <div id="side-resizer" data-resize="side" title="拖动调整左栏宽度"></div>
+    <section id="view-wrap">
+      <canvas id="view"></canvas>
+      <p id="view-hint">白点是地图，橙线是 RTK。彩色点是按外参和该时刻 RTK 变到地图坐标的激光雷达。拖动旋转，滚轮缩放，Shift 或右键平移。</p>
+    </section>
+  </div>
+  <script src="/static/view.js?v=16"></script>
+  <script src="/static/rtk_view.js?v=16"></script>
+</body>
+</html>

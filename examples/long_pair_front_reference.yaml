@@ -1,0 +1,31 @@
+# 父坐标系是前向 long 雷达 hesai_lidar_left_front。
+# 单位 m / rad，RPY 为固定轴 XYZ。
+# RTK 位置是接收机输出的后轴中心，没有再加天线杆臂。
+# RTK 航向变化 47.7 deg。
+
+# long_right_end 相对 long_left_front。使用帧 77，平移离散度 0.031 m。
+hesai_lidar_right_end_hesai_lidar_left_front:
+  x: 0.8533218219
+  y: 4.2985295260
+  z: 0.0305387163
+  roll: -0.0094175492
+  pitch: -0.0050609284
+  yaw: -3.1198661864
+
+# RTK 后轴中心在前向 long 雷达坐标系下。使用帧 386，平移离散度 0.090 m。
+rtk_hesai_lidar_left_front:
+  x: 1.3221245361
+  y: 3.5545617731
+  z: -1.2424524621
+  roll: -0.0128494467
+  pitch: -0.0043315667
+  yaw: -2.2295627144
+
+# 同一关系的逆：前向 long 雷达在 RTK 后轴坐标系下。
+hesai_lidar_left_front_rtk:
+  x: 3.6254380737
+  y: 1.1145726088
+  z: 1.2411839035
+  roll: -0.0044409624
+  pitch: -0.0128120510
+  yaw: 2.2296189933

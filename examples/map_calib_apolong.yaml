@@ -1,0 +1,53 @@
+# 父坐标系是基准雷达 hesai_lidar_left_front。
+# 单位 m / rad，RPY 为固定轴 XYZ。
+# RTK 位置是接收机输出的后轴中心，没有再加天线杆臂。
+# 写入 baseline 时，基准雷达高度固定为 1.0 m，只影响本文件，不改变标定过程。
+# 其余雷达由该基准位姿乘上相对外参，和基准的相对位置保持不变。
+# 地图 /home/zzl/bag/apolong_calib/20261113150315_0_voxel0.30.pcd
+# 数据包 /home/zzl/bag/apolong_calib/lidar_gnss_20261116_160451_0.mcap
+# 坐标系 UTM 32650。RTK 高度与地图一致。
+# RTK 航向变化 47.7 deg。
+
+# hesai_lidar_right_end 相对 hesai_lidar_left_front。使用帧 77，平移离散度 0.035 m。
+hesai_lidar_right_end_hesai_lidar_left_front:
+  x: 0.8571157726
+  y: 4.2961789613
+  z: 0.0306463484
+  roll: -0.0094231246
+  pitch: -0.0050419504
+  yaw: -3.1199322763
+
+# RTK 后轴中心在基准雷达坐标系下。使用帧 386，平移离散度 0.091 m。
+rtk_hesai_lidar_left_front:
+  x: 1.3162964291
+  y: 3.5479884085
+  z: -1.2423732181
+  roll: -0.0128576200
+  pitch: -0.0043310511
+  yaw: -2.2295439739
+
+# 标定得到的基准雷达在 RTK 后轴坐标系下，高度未改。
+hesai_lidar_left_front_rtk:
+  x: 3.6166928722
+  y: 1.1150799833
+  z: 1.2411601624
+  roll: -0.0044461339
+  pitch: -0.0128182814
+  yaw: 2.2296003142
+
+# baseline 外参。基准雷达 z 固定为 1.0，其余雷达相对基准不变。
+hesai_lidar_left_front_base_link:
+  x: 3.6166928722
+  y: 1.1150799833
+  z: 1.0000000000
+  roll: -0.0044461339
+  pitch: -0.0128182814
+  yaw: 2.2296003142
+
+hesai_lidar_right_end_base_link:
+  x: -0.3050454540
+  y: -0.8374059203
+  z: 1.0225302233
+  roll: -0.0047006372
+  pitch: 0.0076770832
+  yaw: -0.8903542361

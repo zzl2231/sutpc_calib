@@ -1,0 +1,169 @@
+# ==========================================================================
+# 各雷达外参：xxx_base_link 相对 base_link
+#   key 名  = <雷达 frame_id> + "_base_link"
+#   link 名 = 雷达 frame_id（与 hesai_ros_driver config 里 ros_frame_id 完全一致，
+#             驱动发的点云直接落在 TF 树上，无需改驱动）
+# 单位：m / rad（RPY 为固定轴 XYZ 欧拉角）
+
+#
+# 坐标系约定（车身坐标系，右手系）：
+#   X+ → 前
+#   Y+ → 左
+#   Z+ → 上
+#   yaw 角：0=朝前, π/2=朝左, π=朝后, -π/2=朝右
+#
+# 摄像头说明：
+#   key 名  = <相机 frame_id> + "_base_link"
+#   link 名 = 相机 frame_id（与相机驱动 ros_frame_id 一致）
+#   宏生成两个 link：
+#     <child_link>              → 相机本体坐标系（与 calib 外参对齐）
+#     <child_link>_optical      → ROS 图像标准坐标系（Z前 X右 Y下）
+#                                 rpy={-π/2, 0, -π/2} 固定旋转，无需标定
+#   驱动发布图像/CameraInfo 的 frame_id 应设为 <child_link>_optical
+#   外参 calib 中的 yaw 按车身坐标系朝向填写（同雷达约定），optical 旋转由 URDF 自动完成
+# ==========================================================================
+
+# Suta 官方文件保留的全零 key：支架原点自身
+base_link:
+  x: 0.0
+  y: 0.0
+  z: 0.0
+  roll: 0.0
+  pitch: 0.0
+  yaw: 0.0
+
+# ---- 远距雷达----
+hesai_lidar_left_front_base_link:
+  x: 3.6424937670
+  y: 1.1154305787
+  z: 1.2411615606
+  roll: -0.0044037537
+  pitch: -0.0128260696
+  yaw: 2.2294231652
+hesai_lidar_right_end_base_link:
+  x: -0.2831986909
+  y: -0.8307720915
+  z: 1.2646607129
+  roll: -0.0048743213
+  pitch: 0.0077573353
+  yaw: -0.8901263806
+
+# ---- 补盲雷达----
+suteng_lidar_left_front_base_link:
+  x: 3.8720793857
+  y: 1.1340532125
+  z: 1.0580473917
+  roll: 3.1174378304
+  pitch: 0.0062778004
+  yaw: -2.1976163799
+suteng_lidar_right_end_base_link:
+  x: -0.4752499250
+  y: -0.8884166549
+  z: 1.0685600476
+  roll: 3.1470094183
+  pitch: 0.0064447072
+  yaw: 0.9281525446
+
+
+# ##################################高区摄像头， 目前安装角度不清楚，未修改 ==============
+# camera_front_top_mid_left_base_link:  #高区摄像头，前顶中左
+#   x: 4.798
+#   y: 0.09427
+#   z: 2.176219
+#   roll: -0.0
+#   pitch: 0.0
+#   yaw: 0.0000053
+
+# camera_left_front_base_link:  #高区摄像头，左前
+#   x: 4.586267
+#   y: 0.958537
+#   z: 1.955401
+#   roll: 0.0
+#   pitch: 0.0
+#   yaw: -1.570796
+
+# camera_end_top_mid_base_link:  #高区摄像头，后顶中
+#   x: -0.543197
+#   y: 0.0
+#   z: 2.204428
+#   roll: 0.0
+#   pitch: 0.0
+#   yaw: -1.570796
+
+# camera_left_end_base_link:  #高区摄像头，左后
+#   x: -0.309
+#   y: 0.901706
+#   z: 2.114321
+#   roll: -0.0
+#   pitch: 0.0
+#   yaw: -1.570796
+
+# camera_front_top_mid_right_base_link:  #高区摄像头，前顶中右
+#   x: 4.798
+#   y: -0.094
+#   z: 2.176
+#   roll: -0.0
+#   pitch: 0.0
+#   yaw: -1.570796
+
+# camera_right_end_base_link:  #高区摄像头，右后
+#   x: -0.309
+#   y: -0.9017
+#   z: 2.1143
+#   roll: 0.0
+#   pitch: -0.0
+#   yaw: -1.570796
+
+# camera_fisheye_left_base_link:  #高区摄像头，鱼眼左
+#   x: 2.391687
+#   y: 0.931835
+#   z: 2.264941
+#   roll: 0.072899
+#   pitch: 0.005068
+#   yaw: -1.57559
+
+# camera_fisheye_right_base_link:  #高区摄像头，鱼眼右
+#   x: 2.21011
+#   y: -0.918
+#   z: 2.2221
+#   roll: 0.0
+#   pitch: 0.0
+#   yaw: -1.570796
+
+# camera_fisheye_front_base_link:  #高区摄像头，鱼眼前
+#   x: 4.798
+#   y: -0.094
+#   z: 2.176
+#   roll: 0.00032
+#   pitch: -0.0
+#   yaw: -1.570796
+
+# camera_fisheye_end_base_link:  #高区摄像头，鱼眼后
+#   x: -0.5339
+#   y: 0.0533
+#   z: 2.277057
+#   roll: -0.0
+#   pitch: -0.0
+#   yaw: -1.570796
+
+# camera_right_front_base_link:  #高区摄像头，右前
+#   x: 4.623909
+#   y: -0.88829
+#   z: 1.780787
+#   roll: 0.003227
+#   pitch: 0.003256
+#   yaw: -1.569269
+
+
+
+# ---- GNSS 天线（chcnav）----
+# link 名必须为 gnss（与 nav_sat_fix 的 header.frame_id 完全一致）
+# 适配器输出的航向已是 base_link 航向；gnss_poser 会叠加 gnss -> base_link 旋转，因此这里 yaw 必须为 0。
+# 量天线相对后轴中心的位置，按本文件约定：x=前向，y=左向，z=高度
+gnss_base_link:
+  x: 0.0      # ← 实测：天线在后轴中心前方为正（m）
+  y: 0.0      # ← 实测：天线在左向的偏移（m）
+  z: 2.5      # ← 实测：车顶天线高度（m）
+  roll: 0.0
+  pitch: 0.0
+  yaw: 0.0
